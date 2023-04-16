@@ -1,6 +1,6 @@
 A severless, progressive web application with React using a test-driven development technique. The application uses the google calender API to fetch upcoming events.
 
-##FEATURE 2: SHOW/HIDE AN EVENT'S DETAILS
+**FEATURE 2: SHOW/HIDE AN EVENT'S DETAILS
 
 #Scenario 1: An event element is collapsed by default
 
