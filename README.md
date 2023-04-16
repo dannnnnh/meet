@@ -1,3 +1,6 @@
+# Meet app
+
+
 A severless, progressive web application with React using a test-driven development technique. The application uses the google calender API to fetch upcoming events.
 
 ## FEATURE 2: SHOW/HIDE AN EVENT'S DETAILS
