@@ -83,6 +83,28 @@ As a user, I should be able to view a chart with the number of upcoming events i
 
 
 
+## Serverless functions will be used in the following ways:
+
+## Filter events by city:
+
+A serverless function will be used to fetch and process event data based on the user's city selection, filtering relevant events and returning the results to the user.
+
+## Show/hide event details:
+
+Will handle the retrieval and display of event details when a user clicks on an event, as well as hiding details when the user chooses to close them.
+
+## Specify number of events:
+
+Will be written to process and return a specific number of events based on user input, ensuring a customized user experience.
+
+## Use the app when offline:
+
+Will be combined with caching mechanisms or service workers to enable offline functionality, storing event data locally and serving it when the user is not connected to the internet.
+
+
+
+
+
 
 
 
