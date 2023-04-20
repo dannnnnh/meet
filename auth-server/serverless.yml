@@ -21,11 +21,16 @@ functions:
           cors:
             origin: '*'
             headers:
-              Access-Control-Allow-Origin: '*'
-              Access-Control-Allow-Credentials: true
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Credentials
             methods:
               - OPTIONS
               - GET
+          integration: lambda
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
+              Access-Control-Allow-Credentials: "'true'"
   getAccessToken:
     handler: handler.getAccessToken
     events:
@@ -41,9 +46,16 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
               - X-Requested-With
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Credentials
             methods:
               - OPTIONS
               - GET
+          integration: lambda
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
+              Access-Control-Allow-Credentials: "'true'"
   getCalendarEvents:
     handler: handler.getCalendarEvents
     events:
@@ -59,6 +71,13 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
               - X-Requested-With
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Credentials
             methods:
               - OPTIONS
               - GET
+          integration: lambda
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
+              Access-Control-Allow-Credentials: "'true'"
