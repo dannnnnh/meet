@@ -20,7 +20,7 @@ functions:
           method: get
           cors:
             origin: '*'
-             headers:
+            headers:
               Access-Control-Allow-Origin: '*'
               Access-Control-Allow-Credentials: true
             methods:
