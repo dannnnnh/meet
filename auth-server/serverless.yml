@@ -1,8 +1,5 @@
 service: auth-server
 
-
-
-
 provider:
   name: aws
   runtime: nodejs12.x
@@ -23,13 +20,9 @@ functions:
           method: get
           cors:
             origin: '*'
-            headers:
-              - Content-Type
-              - Authorization
-              - X-Amz-Date
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Requested-With
+             headers:
+              Access-Control-Allow-Origin: '*'
+              Access-Control-Allow-Credentials: true
             methods:
               - OPTIONS
               - GET
