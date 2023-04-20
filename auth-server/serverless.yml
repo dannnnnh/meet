@@ -1,5 +1,8 @@
 service: auth-server
 
+
+Access-Control-Allow-Origin: *
+
 provider:
   name: aws
   runtime: nodejs12.x
