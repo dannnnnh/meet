@@ -1,9 +1,13 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+// src/__tests__/App.test.js
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import React from 'react';
+import { shallow } from 'enzyme';
+import App from './App';
+import EventList from './EventList';
+
+describe('<App /> component', () => {
+  test('render list of events', () => {
+    const AppWrapper = shallow(<App />);
+    expect(AppWrapper.find(EventList)).toHaveLength(1);
+  });
 });
