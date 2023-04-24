@@ -1,6 +1,7 @@
 {
     "CLIENT_ID": "33159969059-tjunauttblh89r4d5lkld5og3trh5el0.apps.googleusercontent.com",
-    "PROJECT_ID": "meet-apps-384109","auth_uri":"https://accounts.google.com/o/oauth2/auth",
+    "PROJECT_ID": "meet-apps-384109",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
     "CLIENT_SECRET": "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",
     "CALENDAR_ID": "fullstackwebdev@careerfoundry.com"
-  }
+}
