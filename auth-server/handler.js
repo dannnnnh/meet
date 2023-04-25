@@ -1,4 +1,5 @@
 const { google } = require("googleapis");
+
 const OAuth2 = google.auth.OAuth2;
 const calendar = google.calendar("v3");
 /**
@@ -19,8 +20,8 @@ const credentials = {
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-  redirect_uris: ["https://dannnnnh.github.io/meet/"],
-  javascript_origins: ["https://dannnnnh.github.io", "http://localhost:3000"],
+  redirect_uris: ["https://GabCB.github.io/meet/"],
+  javascript_origins: ["https://GabCB.github.io", "http://localhost:3000"],
 };
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
 const oAuth2Client = new google.auth.OAuth2(
@@ -85,7 +86,7 @@ module.exports.getAccessToken = async (event) => {
     });
   })
     .then((token) => {
-      // Respond with OAuth token 
+      // Respond with OAuth token
       return {
         statusCode: 200,
         headers: {
@@ -106,18 +107,18 @@ module.exports.getAccessToken = async (event) => {
 };
 
 module.exports.getCalendarEvents = async (event) => {
-
   const oAuth2Client = new google.auth.OAuth2(
     client_id,
     client_secret,
     redirect_uris[0]
   );
   // Decode authorization code extracted from the URL query
-  const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
+  const access_token = decodeURIComponent(
+    `${event.pathParameters.access_token}`
+  );
   oAuth2Client.setCredentials({ access_token });
 
-  return new Promise ((resolve, reject) => {
-
+  return new Promise((resolve, reject) => {
     calendar.events.list(
       {
         calendarId: calendar_id,
@@ -135,24 +136,24 @@ module.exports.getCalendarEvents = async (event) => {
       }
     );
   })
-  .then( results => {
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true,
-      },
-      body: JSON.stringify({ events: results.data.items }),
-    };
-  })
-  .catch( err => {
-    return {
-      statusCode: 500,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true,
-      },
-      body: JSON.stringify(err)
-    };
-  });
+    .then((results) => {
+      return {
+        statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
+        body: JSON.stringify({ events: results.data.items }),
+      };
+    })
+    .catch((err) => {
+      return {
+        statusCode: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
+        body: JSON.stringify(err),
+      };
+    });
 };
