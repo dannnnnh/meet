@@ -1,9 +1,18 @@
+/**
+ *
+ * @param {*} events:
+ * The following function should be in the “api.js” file.
+ * This function takes an events array, then uses map to create a new array with only locations.
+ * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
+ * The Set will remove all duplicates from the array.
+ */
+
 import { mockData } from "./mock-data";
 import axios from "axios";
 import NProgress from "nprogress";
 
 export const getAccessToken = async () => {
-  const accessToken = localStorage.getItem("access_token");
+  const accessToken = localStorage.getItem('access_token');
   const tokenCheck = accessToken && (await checkToken(accessToken));
   if (!accessToken || tokenCheck.error) {
     await localStorage.removeItem("access_token");
@@ -12,16 +21,15 @@ export const getAccessToken = async () => {
     if (!code) {
       const results = await axios.get(
         "https://am77ht0jik.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
-      );
-      const { authUrl } = results.data;
-      console.log("Redirecting to authUrl:", authUrl); // Add log for the auth URL
-
-      return (window.location.href = authUrl);
+        );
+        const { authUrl } = results.data;
+        return (window.location.href = authUrl);
+      }
+      return code && getToken(code);
     }
-    return code && getToken(code);
+    return accessToken;
   }
-  return accessToken;
-};
+  
 
 const checkToken = async (accessToken) => {
   const result = await fetch(

@@ -9,6 +9,17 @@ class CitySearch extends Component {
     showSuggestions: undefined,
   };
 
+  handleInputChanged = (event) => {
+    const value = event.target.value;
+    const suggestions = this.props.locations.filter((location) => {
+      return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
+    });
+    this.setState({
+      query: value,
+      suggestions,
+    });
+  };
+
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
@@ -18,23 +29,10 @@ class CitySearch extends Component {
     this.props.updateEvents(suggestion);
   };
 
-  handleInputChanged = (event) => {
-    const value = event.target.value;
-    const suggestions = this.props.locations.filter((location) => {
-      // Ensure location is defined before calling .toUpperCase()
-      return (
-        location && location.toUpperCase().indexOf(value.toUpperCase()) > -1
-      );
-    });
-    this.setState({
-      query: value,
-      suggestions,
-    });
-  };
-
   render() {
     return (
       <div className="CitySearch">
+        <h3>Choose a city:</h3>
         <input
           type="text"
           className="city"
@@ -47,7 +45,19 @@ class CitySearch extends Component {
         <ul
           className="suggestions"
           style={this.state.showSuggestions ? {} : { display: "none" }}
-        ></ul>
+        >
+          {this.state.suggestions.map((suggestion) => (
+            <li
+              key={suggestion}
+              onClick={() => this.handleItemClicked(suggestion)}
+            >
+              {suggestion}
+            </li>
+          ))}
+          <li onClick={() => this.handleItemClicked("all")}>
+            <b>See all cities</b>
+          </li>
+        </ul>
       </div>
     );
   }
