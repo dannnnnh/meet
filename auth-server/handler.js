@@ -20,7 +20,11 @@ const credentials = {
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
   redirect_uris: ["https://dannnnnh.github.io/meet/"],
-  javascript_origins: ["https://dannnnnh.github.io", "http://localhost:3000"],
+  javascript_origins: [
+    "https://dannnnnh.github.io",
+    "http://localhost:3000",
+    "https://dannnnnh.github.io/meet/",
+  ],
 };
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
 const oAuth2Client = new google.auth.OAuth2(
@@ -32,7 +36,7 @@ const oAuth2Client = new google.auth.OAuth2(
 /**
  *
  * The first step in the OAuth process is to generate a URL so users can log in with
- * Google and be authorized to see your calendar events data. After logging in, they’ll receive a code, adding test comment.
+ * Google and be authorized to see your calendar events data. After logging in, they’ll receive a code
  * as a URL parameter.
  *
  */
