@@ -36,7 +36,7 @@ const oAuth2Client = new google.auth.OAuth2(
 /**
  *
  * The first step in the OAuth process is to generate a URL so users can log in with
- * Google and be authorized to see your calendar events data. After logging in, they’ll receive a code
+ * Google and be authorized to see your calendar events data. After logging in, they’ll receive a code, adding test comment.
  * as a URL parameter.
  *
  */
@@ -65,6 +65,7 @@ module.exports.getAuthURL = async () => {
     }),
   };
 };
+
 
 module.exports.getAccessToken = async (event) => {
   // The values used to instantiate the OAuthClient are at the top of the file
