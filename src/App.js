@@ -9,6 +9,8 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
+    eventCount: 32,
+    selectedCity: null,
   };
 
   componentDidMount() {
@@ -39,7 +41,7 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <CitySearch
+         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
         />

@@ -12,12 +12,11 @@ class CitySearch extends Component {
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
-      showSuggestions: false
+      showSuggestions: false,
     });
-  
+
     this.props.updateEvents(suggestion);
-  }
-  
+  };
 
   handleInputChanged = (event) => {
     const value = event.target.value;
@@ -45,8 +44,10 @@ class CitySearch extends Component {
             this.setState({ showSuggestions: true });
           }}
         />
-        <ul className="suggestions" style={this.state.showSuggestions ? {}: { display: 'none' }}>
-</ul>
+        <ul
+          className="suggestions"
+          style={this.state.showSuggestions ? {} : { display: "none" }}
+        ></ul>
       </div>
     );
   }

@@ -14,6 +14,8 @@ export const getAccessToken = async () => {
         "https://am77ht0jik.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
       );
       const { authUrl } = results.data;
+      console.log("Redirecting to authUrl:", authUrl); // Add log for the auth URL
+
       return (window.location.href = authUrl);
     }
     return code && getToken(code);
@@ -28,6 +30,7 @@ const checkToken = async (accessToken) => {
     .then((res) => res.json())
     .catch((error) => error.json());
 
+  console.log("Checking Token:", result); // Add log for token check results
   return result;
 };
 
@@ -36,6 +39,7 @@ export const getEvents = async () => {
 
   if (window.location.href.startsWith("http://localhost")) {
     NProgress.done();
+    console.log("Using mockData:", mockData); // Add log for using mock data
     return mockData;
   }
 
@@ -48,6 +52,8 @@ export const getEvents = async () => {
       "/" +
       token;
     const result = await axios.get(url);
+    console.log("Events fetched:", result.data); // Add log for fetched events data
+
     if (result.data) {
       var locations = extractLocations(result.data.events);
       localStorage.setItem("lastEvents", JSON.stringify(result.data));
@@ -80,14 +86,18 @@ const getToken = async (code) => {
         "/" +
         encodeCode
     );
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+
     const { access_token } = await response.json();
+    console.log("Access token received:", access_token); // Add log for received access token
+
     access_token && localStorage.setItem("access_token", access_token);
     return access_token;
   } catch (error) {
-    error.json();
+    console.error(error.message);
   }
 };
 
