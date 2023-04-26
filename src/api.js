@@ -60,8 +60,8 @@ export const getEvents = async () => {
 
     if (result.data) {
       var locations = extractLocations(result.data.events);
-      localStorage.setItem('lastEvents', JSON.stringify(result.data));
-      localStorage.setItem('locations', JSON.stringify(locations));
+      localStorage.setItem("lastEvents", JSON.stringify(result.data));
+      localStorage.setItem("locations", JSON.stringify(locations));
     }
     NProgress.done();
     return result.data.events;
