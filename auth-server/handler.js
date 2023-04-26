@@ -19,11 +19,11 @@ const credentials = {
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-  redirect_uris: ["https://keen-khapse-6620ca.netlify.app/"],
+  redirect_uris: ["https://dannnnnh.github.io/meet/"],
   javascript_origins: [
     "https://dannnnnh.github.io",
     "http://localhost:3000",
-    "https://keen-khapse-6620ca.netlify.app/",
+    "https://dannnnnh.github.io/meet/",
   ],
 };
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
@@ -40,18 +40,30 @@ const oAuth2Client = new google.auth.OAuth2(
  * as a URL parameter.
  *
  */
-module.exports.getAuthURL = async (event) => {
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      },
-      body: JSON.stringify({ message: "Preflight request handled" }),
-    };
-  }
+module.exports.getAuthURL = async () => {
+  /**
+   *
+   * Scopes array passed to the `scope` option. Any scopes passed must be enabled in the
+   * "OAuth consent screen" settings in your project on your Google Console. Also, any passed
+   *  scopes are the ones users will see when the consent screen is displayed to them.
+   *
+   */
+  const authUrl = oAuth2Client.generateAuthUrl({
+    access_type: "offline",
+    scope: SCOPES,
+  });
+
+  return {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    },
+    body: JSON.stringify({
+      authUrl: authUrl,
+    }),
+  };
 };
 
 module.exports.getAccessToken = async (event) => {
