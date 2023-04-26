@@ -58,6 +58,7 @@ module.exports.getAuthURL = async () => {
     headers: {
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
       "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
     },
     body: JSON.stringify({
@@ -96,6 +97,7 @@ module.exports.getAccessToken = async (event) => {
         headers: {
           "Access-Control-Allow-Headers": "Content-Type",
           "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
           "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
         },
         body: JSON.stringify(token),
@@ -147,6 +149,7 @@ module.exports.getCalendarEvents = async (event) => {
         headers: {
           "Access-Control-Allow-Headers": "Content-Type",
           "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
           "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
         },
         body: JSON.stringify({ events: results.data.items }),
@@ -158,6 +161,7 @@ module.exports.getCalendarEvents = async (event) => {
         headers: {
           "Access-Control-Allow-Headers": "Content-Type",
           "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
           "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
         },
         body: JSON.stringify(err),
