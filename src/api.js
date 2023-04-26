@@ -1,10 +1,9 @@
-
 import { mockData } from "./mock-data";
 import axios from "axios";
 import NProgress from "nprogress";
 
 export const getAccessToken = async () => {
-  const accessToken = localStorage.getItem('access_token');
+  const accessToken = localStorage.getItem("access_token");
   const tokenCheck = accessToken && (await checkToken(accessToken));
   if (!accessToken || tokenCheck.error) {
     await localStorage.removeItem("access_token");
@@ -13,15 +12,14 @@ export const getAccessToken = async () => {
     if (!code) {
       const results = await axios.get(
         "https://am77ht0jik.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
-        );
-        const { authUrl } = results.data;
-        return (window.location.href = authUrl);
-      }
-      return code && getToken(code);
+      );
+      const { authUrl } = results.data;
+      return (window.location.href = authUrl);
     }
-    return accessToken;
+    return code && getToken(code);
   }
-  
+  return accessToken;
+};
 
 const checkToken = async (accessToken) => {
   const result = await fetch(
@@ -83,7 +81,6 @@ const getToken = async (code) => {
     const encodeCode = encodeURIComponent(code);
     const response = await fetch(
       "https://am77ht0jik.execute-api.eu-central-1.amazonaws.com/dev/api/token/" +
-        "/" +
         encodeCode
     );
 
