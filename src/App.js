@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import EventList from "./EventList";
 import CitySearch from "./CitySearch";
+import EventList from "./EventList";
 import NumberOfEvents from "./NumberOfEvents";
 import { getEvents, extractLocations } from "./api";
 import "./nprogress.css";
@@ -10,15 +10,19 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    selectedLocation: "all",
-    numberOfEvents: 32,
+    eventCount: 32,
+    selectedCity: null,
   };
 
   componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) });
+        const shownEvents = events;
+        this.setState({
+          events: shownEvents,
+          locations: extractLocations(events),
+        });
       }
     });
   }
@@ -27,37 +31,51 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateNumberOfEvents(number) {
-    this.setState({
-      numberOfEvents: number,
-    });
-  }
-
-  updateEvents = (location, inputNumber) => {
-    const { selectedLocation } = this.state;
-    if (location) {
+  updateEvents = (location, eventCount) => {
+    if (!eventCount) {
       getEvents().then((events) => {
         const locationEvents =
           location === "all"
             ? events
             : events.filter((event) => event.location === location);
-        const eventsToShow = locationEvents.slice(0, inputNumber);
+        const shownEvents = locationEvents.slice(0, this.state.eventCount);
         this.setState({
-          events: eventsToShow,
-          selectedLocation: location,
-          numberOfEvents: inputNumber,
+          events: shownEvents,
+          selectedCity: location,
+        });
+      });
+    } else if (eventCount && !location) {
+      getEvents().then((events) => {
+        const locationEvents = events.filter((event) =>
+          this.state.locations.includes(event.location)
+        );
+        const shownEvents = locationEvents.slice(0, eventCount);
+        this.setState({
+          events: shownEvents,
+          eventCount: eventCount,
+        });
+      });
+    } else if (this.state.selectedCity === "all") {
+      getEvents().then((events) => {
+        const locationEvents = events;
+        const shownEvents = locationEvents.slice(0, eventCount);
+        this.setState({
+          events: shownEvents,
+          eventCount: eventCount,
         });
       });
     } else {
       getEvents().then((events) => {
         const locationEvents =
-          selectedLocation === "all"
+          this.state.locations === "all"
             ? events
-            : events.filter((event) => event.location === selectedLocation);
-        const eventsToShow = locationEvents.slice(0, inputNumber);
+            : events.filter(
+                (event) => this.state.selectedCity === event.location
+              );
+        const shownEvents = locationEvents.slice(0, eventCount);
         this.setState({
-          events: eventsToShow,
-          numberOfEvents: inputNumber,
+          events: shownEvents,
+          eventCount: eventCount,
         });
       });
     }
@@ -65,16 +83,17 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
         />
-        <EventList events={this.state.events} />
         <NumberOfEvents
-          numberOfEvents={this.state.numberOfEvents}
+          selectedCity={this.state.selectedCity}
+          query={this.state.eventCount}
           updateEvents={this.updateEvents}
         />
+        <EventList events={this.state.events} />
       </div>
     );
   }

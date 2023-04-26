@@ -73,14 +73,18 @@ describe ('<App /> integration', () =>{
 
   //Integration tests for NumberOfEvents
 
-  test('App passes "numberOfEvents" state as a prop to NumberOfEvents', () => {
-    const AppWrapper = mount(<App />);
-    const AppEventCountState = AppWrapper.state('numberOfEvents');
-    expect(AppEventCountState).not.toEqual(undefined);
-    AppWrapper.setState({ numberOfEvents: 10 });
-    expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toBe(AppWrapper.state('numberOfEvents'));
-    AppWrapper.unmount();
-  }); 
+//...
+// Find and Update this test
+
+test('App passes "eventCount" state as a prop to NumberOfEvents', () => {
+  const AppWrapper = mount(<App />);
+  const AppEventCountState = AppWrapper.state('eventCount'); // Change 'numberOfEvents' to 'eventCount'
+  expect(AppEventCountState).not.toEqual(undefined);
+  AppWrapper.setState({ eventCount: 10 }); // Change 'numberOfEvents' to 'eventCount'
+  expect(AppWrapper.find(NumberOfEvents).props().query).toBe(AppWrapper.state('eventCount')); // Change 'numberOfEvents' to 'query'
+  AppWrapper.unmount();
+});
+//...
 
   test('Filtered list of events matches mock data', async () => {
     const AppWrapper = mount(<App />);

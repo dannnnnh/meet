@@ -31,7 +31,10 @@ class CitySearch extends Component {
 
   render() {
     return (
-      <div className="CitySearch">
+      <div
+        className="CitySearch"
+        style={{ marginRight: "auto", marginLeft: "auto" }}
+      >
         <h3>Choose a city:</h3>
         <input
           type="text"
@@ -44,7 +47,11 @@ class CitySearch extends Component {
         />
         <ul
           className="suggestions"
-          style={this.state.showSuggestions ? {} : { display: "none" }}
+          style={
+            this.state.showSuggestions
+              ? { margin: "16px 0", padding: "0px" }
+              : { display: "none" }
+          }
         >
           {this.state.suggestions.map((suggestion) => (
             <li
@@ -54,7 +61,10 @@ class CitySearch extends Component {
               {suggestion}
             </li>
           ))}
-          <li onClick={() => this.handleItemClicked("all")}>
+          <li
+            onClick={() => this.handleItemClicked("all")}
+            style={{ listStyle: "none" }}
+          >
             <b>See all cities</b>
           </li>
         </ul>
