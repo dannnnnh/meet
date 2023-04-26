@@ -35,13 +35,19 @@ const checkToken = async (accessToken) => {
 export const getEvents = async () => {
   NProgress.start();
 
+  if (!navigator.onLine) {
+    const data = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return data ? JSON.parse(data).events : [];
+  }
+
+  const token = await getAccessToken();
+
   if (window.location.href.startsWith("http://localhost")) {
     NProgress.done();
     console.log("Using mockData:", mockData); // Add log for using mock data
     return mockData;
   }
-
-  const token = await getAccessToken();
 
   if (token) {
     removeQuery();
@@ -54,8 +60,8 @@ export const getEvents = async () => {
 
     if (result.data) {
       var locations = extractLocations(result.data.events);
-      localStorage.setItem("lastEvents", JSON.stringify(result.data));
-      localStorage.setItem("locations", JSON.stringify(locations));
+      localStorage.setItem('lastEvents', JSON.stringify(result.data));
+      localStorage.setItem('locations', JSON.stringify(locations));
     }
     NProgress.done();
     return result.data.events;
