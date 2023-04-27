@@ -57,7 +57,11 @@ class CitySearch extends Component {
         />
         <ul
           className="suggestions"
-          style={this.state.showSuggestions ? {} : { display: "none" }}
+          style={
+            this.state.showSuggestions
+              ? { listStyle: "none", margin: "16px, 0" }
+              : { display: "none" }
+          }
         >
           {this.state.suggestions.map((suggestion) => (
             <li
