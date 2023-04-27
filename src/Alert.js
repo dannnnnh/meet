@@ -14,7 +14,15 @@ class Alert extends Component {
 
   render() {
     return (
-      <div className='Alert'>
+      <div
+        className="Alert"
+        style={{
+          backgroundColor: "rgba(0, 0, 255, 0.1)", // To give a light blue background color
+          borderRadius: "5px", // To give rounded corners
+          padding: "10px", // Padding around the text
+          fontSize: "1.2em", // Increase the font size for better visibility
+        }}
+      >
         <p style={this.getStyle()}>{this.props.text}</p>
       </div>
     );
