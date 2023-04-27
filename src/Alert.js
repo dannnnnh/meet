@@ -6,15 +6,15 @@ class Alert extends Component {
     this.color = null;
   }
 
-  getStyle = () => {
+  getStyle() {
     return {
       color: this.color,
     };
-  };
+  }
 
   render() {
     return (
-      <div className="Alert">
+      <div className='Alert'>
         <p style={this.getStyle()}>{this.props.text}</p>
       </div>
     );
