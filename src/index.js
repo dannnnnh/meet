@@ -8,7 +8,7 @@ import * as atatus from "atatus-spa";
 
 atatus.config("5c7dcf6fb47c44109de4fd369dab8b86").install();
 
-//Tst comment
+//Test comment
 
 ReactDOM.render(
   <React.StrictMode>
