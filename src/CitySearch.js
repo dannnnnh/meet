@@ -65,6 +65,7 @@ class CitySearch extends Component {
         >
           {this.state.suggestions.map((suggestion) => (
             <li
+              style={{ cursor: "pointer", listStyle: "none" }}
               key={suggestion}
               onClick={() => this.handleItemClicked(suggestion)}
             >
