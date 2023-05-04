@@ -123,9 +123,8 @@ class App extends Component {
           updateEvents={this.updateEvents}
         />
         <h3>Events in each city</h3>
-        <ResponsiveContainer height={400}>
-          <EventGenre events={this.state.events} />
-
+        <EventGenre events={this.state.events} />
+        <ResponsiveContainer height={200}>
           <ScatterChart
             width={800}
             height={400}
