@@ -108,18 +108,18 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Meet app</h1>
-        <h2>Search for city</h2>
+        <h3>Search for city</h3>
         <CitySearch
           locations={this.state.locations}
           updateEvents={this.updateEvents}
         />
-        <h2>Number of events</h2>
+        <h3>Number of events</h3>
         <NumberOfEvents
           selectedCity={this.state.selectedCity}
           query={this.state.eventCount}
           updateEvents={this.updateEvents}
         />
-        <h2>Events in each city</h2>
+        <h3>Events in each city</h3>
         <ResponsiveContainer height={400}>
           <ScatterChart
             width={800}
