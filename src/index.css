@@ -17,3 +17,10 @@ code {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
+
+button{
+    height: 48px;
+    width: 180px;
+    border-radius: 4px;
+    margin: 16px 0;
+}
