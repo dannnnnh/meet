@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
-import "./index.css";
+import ".src/index.css";
 import CitySearch from "./CitySearch";
 import EventList from "./EventList";
 import NumberOfEvents from "./NumberOfEvents";
 import { getEvents, extractLocations } from "./api";
 import "./nprogress.css";
+import EventGenre from "./EventGenre";
+
 import {
   ScatterChart,
   Scatter,
@@ -122,6 +124,8 @@ class App extends Component {
         />
         <h3>Events in each city</h3>
         <ResponsiveContainer height={400}>
+          <EventGenre events={this.state.events} />
+
           <ScatterChart
             width={800}
             height={400}
