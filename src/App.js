@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from "react";
+import React, { Component } from "react";
 import "./App.css";
 import CitySearch from "./CitySearch";
 import EventList from "./EventList";
