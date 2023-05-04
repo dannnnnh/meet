@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import ".src/index.css";
+import ".index.css";
 import CitySearch from "./CitySearch";
 import EventList from "./EventList";
 import NumberOfEvents from "./NumberOfEvents";
